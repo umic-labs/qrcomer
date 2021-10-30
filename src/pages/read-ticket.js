@@ -4,28 +4,12 @@ import { updateMeal } from '../services/tickets-service'
 
 function ReadTicket({ ticketsManager }) {
   const [currentMeal, setCurrentMeal] = useState(null)
-  /*
-  const handleError = (e, err) => {
-    e.preventDefault()
-    console.log(err)
-    alert('Erro ao ler QR Code')
 
-    setCurrentMeal(null)
-  }
-
-  const handleScan = (e, data) => {
-    e.preventDefault()
-    if (data) {
-      let status = updateMeal(ticketsManager, 12345, currentMeal)
-      status ? alert('Já comeu') : alert('Boa refeição')
-    }
-    setCurrentMeal(null)
-  }
-*/
   const handleScan = (data) => {
+    console.log(data)
     if (!!data) {
       let status = updateMeal(ticketsManager, data, currentMeal)
-      status ? alert('Já comeu') : alert('Boa refeição')
+      status ? alert('Boa refeição!') : alert('Já comeu!')
 
       console.log(data)
       setCurrentMeal(null)
@@ -43,7 +27,7 @@ function ReadTicket({ ticketsManager }) {
     <div className="container pt-4">
       <h4>Ler QR Code</h4>
       <br />
-      {!currentMeal ? (
+      {currentMeal === null ? (
         <>
           <h5>Escolha qual refeição</h5>
           <button
