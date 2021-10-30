@@ -1,8 +1,6 @@
 function ListTickets({ ticketsManager }) {
   const { tickets } = ticketsManager
 
-  console.log(tickets)
-
   const getTicketMealStatus = (meals) =>
     meals.map((meal) => {
       return meal ? `✔️` : `❌`
@@ -40,9 +38,7 @@ function ListTickets({ ticketsManager }) {
               <th scope="col">Refeição</th>
             </tr>
           </thead>
-          <tbody>
-            {listTickets()}
-          </tbody>
+          <tbody>{listTickets()}</tbody>
         </table>
       </div>
     </div>
