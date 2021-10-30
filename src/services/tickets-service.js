@@ -27,8 +27,8 @@ export function updateMeal(ticketsManager, ticketID, currentMeal) {
 
   let ticketIndex = tickets.findIndex((ticket => ticket.id === ticketID))
 
-  if (tickets[ticketIndex].meal[currentMeal] === 1 || ticketIndex < 0) return false 
-  else tickets[ticketIndex].meal[currentMeal] = 1
+  if (tickets[ticketIndex].meals[currentMeal] === 1 || ticketIndex < 0) return false 
+  else tickets[ticketIndex].meals[currentMeal] = 1
 
   localStorage.setItem('tickets', JSON.stringify(tickets))
   setTickets(tickets)
