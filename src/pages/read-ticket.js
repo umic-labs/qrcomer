@@ -1,8 +1,43 @@
 import React, { useState } from 'react'
+import QrReader from 'react-qr-reader'
 import { updateMeal } from '../services/tickets-service'
 
-function ReadTicket() {
+function ReadTicket({ ticketsManager }) {
   const [currentMeal, setCurrentMeal] = useState(null)
+  /*
+  const handleError = (e, err) => {
+    e.preventDefault()
+    console.log(err)
+    alert('Erro ao ler QR Code')
+
+    setCurrentMeal(null)
+  }
+
+  const handleScan = (e, data) => {
+    e.preventDefault()
+    if (data) {
+      let status = updateMeal(ticketsManager, 12345, currentMeal)
+      status ? alert('Já comeu') : alert('Boa refeição')
+    }
+    setCurrentMeal(null)
+  }
+*/
+  const handleScan = (data) => {
+    if (!!data) {
+      let status = updateMeal(ticketsManager, data, currentMeal)
+      status ? alert('Já comeu') : alert('Boa refeição')
+
+      console.log(data)
+      setCurrentMeal(null)
+    }
+  }
+
+  const handleError = (err) => {
+    console.log(err)
+    alert('Erro ao ler QR Code')
+
+    setCurrentMeal(null)
+  }
 
   return (
     <div className="container pt-4">
@@ -48,6 +83,12 @@ function ReadTicket() {
             Voltar
           </button>
           <br />
+          <QrReader
+            delay={300}
+            onError={handleError}
+            onScan={handleScan}
+            style={{ width: '100%' }}
+          />
         </>
       )}
     </div>
@@ -55,11 +96,3 @@ function ReadTicket() {
 }
 
 export default ReadTicket
-
-/* 
-AÇÕES 
-
-Registrar refeição
-Avisar se já tiver comido
-
-*/
