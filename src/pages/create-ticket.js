@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { createTicket } from '../services/tickets-service'
 
 const initialTicketForm = {

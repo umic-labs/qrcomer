@@ -1,11 +1,4 @@
-const initialTicketList = [
-  {
-    id: '2564A',
-    name: 'Igor Aragão',
-    church: 'PIC Taguatinga',
-    meals: [1, 0, 0],
-  },
-]
+import { initialTicketList } from '../constants/ticket-list'
 
 export function getTickets() {
   if (typeof window !== 'undefined' && window) {
@@ -27,4 +20,14 @@ export function createTicket(ticketsManager, newTicket) {
 
   localStorage.setItem('tickets', JSON.stringify(tickets))
   setTickets(tickets)
+}
+
+export function updateMeal(ticketsManager, ticketID, currentMeal) {
+  const { tickets, setTickets } = ticketsManager
+
+  let ticketIndex = tickets.findIndex((ticket => ticket.id === ticketID))
+  if (tickets[ticketIndex].meal[currentMeal] === 1) return false 
+
+  setTickets(tickets)
+  return true
 }
