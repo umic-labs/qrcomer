@@ -9,7 +9,7 @@ const initialTicketList = [
 
 export function getTickets() {
   if (typeof window !== 'undefined' && window) {
-    const getTicketsFromStorage = localStorage.getItem('cart')
+    const getTicketsFromStorage = localStorage.getItem('tickets')
     const tickets = !getTicketsFromStorage
       ? initialTicketList
       : JSON.parse(getTicketsFromStorage)
@@ -18,4 +18,13 @@ export function getTickets() {
   }
 
   return []
+}
+
+export function createTicket(ticketsManager, newTicket) {
+  const { tickets, setTickets } = ticketsManager
+  let ticket = { ...newTicket, meals: [0, 0, 0] }
+  tickets.push(ticket)
+
+  localStorage.setItem('tickets', JSON.stringify(tickets))
+  setTickets(tickets)
 }
