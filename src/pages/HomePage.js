@@ -1,8 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import TopBar from '../components/TopBar'
-import ItemHero from '../components/ItemHero'
-import { Button, ButtonGroup, Container, Typography } from '@mui/material'
+import { Button, Container, Typography } from '@mui/material'
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -10,7 +9,6 @@ const HomePage = () => {
   return (
     <>
       <TopBar title="QRComer" />
-
 
       <Container maxWidth="md"
         sx={{

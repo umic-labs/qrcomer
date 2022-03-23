@@ -4,6 +4,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import './config/i18n'
 
 import MealsPage from "./pages/MealsPage";
 import HomePage from './pages/HomePage'

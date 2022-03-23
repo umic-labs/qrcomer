@@ -1,0 +1,11 @@
+{
+  "meals_page": {
+    "breakfast": "Café da manhã",
+    "dinner": "Janta",
+    "lunch": "Almoço",
+    "title": "Carimbar refeições"
+  },
+  "topbar": {
+    "title": "QRComer"
+  }
+}

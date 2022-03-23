@@ -14,7 +14,7 @@ export default function NavMenu() {
   const navigate = useNavigate()
 
   return (
-    <Paper>
+    <Paper sx={{ width: 250 }}>
       <MenuList>
         <MenuItem onClick={ () => navigate('/')}>
           <ListItemIcon>

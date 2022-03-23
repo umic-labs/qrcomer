@@ -6,8 +6,10 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import NavMenu from './NavMenu'
+import { useTranslation } from 'react-i18next'
 
-export default function TopBar({ title }) {
+export default function TopBar() {
+  const { t } = useTranslation()
 
   const [isMenuVisisible, setIsMenuVisible] = useState(false)
 
@@ -28,7 +30,7 @@ export default function TopBar({ title }) {
             </IconButton>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              { title }
+              { t('topbar.title') }
             </Typography>
           </Toolbar>
         </AppBar>
