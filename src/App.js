@@ -1,41 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
-import { getTickets } from "./services/tickets-service";
-
-import CreateTicket from "./pages/create-ticket";
-import ListTickets from "./pages/list-tickets";
-import ReadTicket from "./pages/read-ticket";
+import MealsPage from "./pages/MealsPage";
+import HomePage from './pages/HomePage'
+import SessionsPage from './pages/SessionsPage'
+import AttendeePage from './pages/AttendeePage'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("list");
-  const [tickets, setTickets] = useState(null);
-
-  const ticketsManager = {
-    tickets: tickets,
-    setTickets: setTickets
-  };
-
-  useEffect(() => {
-    const tickets = getTickets();
-
-    setTickets(tickets);
-  }, [])
-
   return (
-    <div className="container pt-4">
-      <h1>UMIC Tickets</h1>
-      <br/>
-      <button className="btn btn-primary me-2" onClick={() => setCurrentPage("list")}>Lista</button>
-      <button className="btn btn-primary me-2" onClick={() => setCurrentPage("create")}>Criar</button>
-      <button className="btn btn-primary me-2" onClick={() => setCurrentPage("read")}>Ler QR Code</button>
-      <br/>
-      {
-        currentPage === "list" ? <ListTickets ticketsManager={ticketsManager}/> :
-        currentPage === "create" ? <CreateTicket ticketsManager={ticketsManager}/> :
-        currentPage === "read" ? <ReadTicket ticketsManager={ticketsManager}/> :
-        null
-      }
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomePage/>} />
+        <Route path='/meals' element={<MealsPage/>} />
+        <Route path='/sessions' element={<SessionsPage/>} />
+        <Route path='/attendee' element={<AttendeePage/>} />
+      </Routes>
+    </Router>
   );
 }
 
