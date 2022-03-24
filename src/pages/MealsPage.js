@@ -2,11 +2,13 @@ import { Container, Divider, List, ListItem, ListItemButton, ListItemText, Typog
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
 import TopBar from '../components/TopBar'
 import { fetch } from '../services/meals.service'
 
 const HomePage = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const [meals, setMeals] = useState([])
 
@@ -48,7 +50,9 @@ const HomePage = () => {
                         day.meals.map(meal => (
                           <div key={meal.id}>
                             <ListItem disablePadding>
-                              <ListItemButton>
+                              <ListItemButton
+                                onClick={() => navigate(`/register-service?meal=${meal.id}`)}
+                              >
                                 <ListItemText primary={ t(`meals_page.${meal.type}`) } />
                               </ListItemButton>
                             </ListItem>

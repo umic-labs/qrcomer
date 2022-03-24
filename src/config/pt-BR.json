@@ -8,6 +8,9 @@
   "lectures_page": {
 
   },
+  "register_service_page": {
+    "title": "Leia o código QR:"
+  },
   "topbar": {
     "title": "QRComer"
   }

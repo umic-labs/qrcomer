@@ -10,6 +10,7 @@ import MealsPage from "./pages/MealsPage";
 import HomePage from './pages/HomePage'
 import LecturesPage from './pages/LecturesPage'
 import AttendeePage from './pages/AttendeePage'
+import RegisterServicePage from './pages/RegisterServicePage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/meals' element={<MealsPage/>} />
         <Route path='/lectures' element={<LecturesPage/>} />
         <Route path='/attendee' element={<AttendeePage/>} />
+        <Route path='/register-service' element={<RegisterServicePage/>} />
       </Routes>
     </Router>
   );

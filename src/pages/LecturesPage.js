@@ -10,11 +10,13 @@ import {
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
 import TopBar from '../components/TopBar'
 import { fetch } from '../services/lectures.service'
 
 const SessionsPage = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const [lectures, setLectures] = useState([])
 
@@ -56,7 +58,9 @@ const SessionsPage = () => {
                         day.lectures?.map(lecture => (
                           <div key={lecture.id}>
                             <ListItem disablePadding>
-                              <ListItemButton>
+                              <ListItemButton
+                                onClick={() => navigate(`/register-service?lecture=${lecture.id}`)}
+                              >
                                 <ListItemText primary={lecture.title} />
                               </ListItemButton>
                             </ListItem>
