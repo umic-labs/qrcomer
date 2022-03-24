@@ -1,20 +1,28 @@
-import { Container, Divider, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
+import {
+  Container,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography
+} from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../components/TopBar'
-import { fetch } from '../services/meals.service'
+import { fetch } from '../services/lectures.service'
 
-const HomePage = () => {
+const SessionsPage = () => {
   const { t } = useTranslation()
 
-  const [meals, setMeals] = useState([])
+  const [lectures, setLectures] = useState([])
 
   useEffect(() => {
-    fetch().then(setMeals)
+    fetch().then(setLectures)
   }, [])
 
-  const mealsByDate = composeMealsByDate({ meals })
+  const lecturesByDate = composeLecturesByDate({ lectures })
 
   return (
     <>
@@ -32,7 +40,7 @@ const HomePage = () => {
         </Typography>
 
           {
-            mealsByDate?.map(day => (
+            lecturesByDate?.map(day => (
               <Box key={day.date} sx={{ mb: 4 }}>
                 <Typography
                   variant="h6"
@@ -45,11 +53,11 @@ const HomePage = () => {
                   <nav aria-label="secondary mailbox folders">
                     <List>
                       {
-                        day.meals.map(meal => (
-                          <div key={meal.id}>
+                        day.lectures?.map(lecture => (
+                          <div key={lecture.id}>
                             <ListItem disablePadding>
                               <ListItemButton>
-                                <ListItemText primary={ t(`meals_page.${meal.type}`) } />
+                                <ListItemText primary={lecture.title} />
                               </ListItemButton>
                             </ListItem>
 
@@ -68,17 +76,17 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default SessionsPage
 
-const composeMealsByDate = ({ meals }) => {
-  if(!meals) return
+const composeLecturesByDate = ({ lectures }) => {
+  if(!lectures) return
 
-  const uniqueDates = [...new Set(meals.map(meal => meal.date))]
+  const uniqueDates = [...new Set(lectures.map(lecture => lecture.date))]
 
   return uniqueDates.map(date => (
     {
       date: date,
-      meals: meals.filter((meal) => meal.date === date)
+      lectures: lectures.filter((lecture) => lecture.date === date)
     }
   ))
 }

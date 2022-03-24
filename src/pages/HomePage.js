@@ -38,7 +38,7 @@ const HomePage = () => {
           variant="outlined"
           size="large"
           sx={{ mb: 2 }}
-          onClick={() => navigate('/sessions')}
+          onClick={() => navigate('/lectures')}
         >
           Palestras
         </Button>

@@ -30,11 +30,11 @@ export default function NavMenu() {
           <ListItemText> Carimbar refeicao </ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={ () => navigate('/sessions')}>
+        <MenuItem onClick={ () => navigate('/lectures')}>
           <ListItemIcon>
             <ConfirmationNumberIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText> Carimbar sessao </ListItemText>
+          <ListItemText> Carimbar palestra </ListItemText>
         </MenuItem>
         
         <MenuItem onClick={ () => navigate('/meals')}>

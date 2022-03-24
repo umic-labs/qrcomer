@@ -4,7 +4,7 @@ import TopBar from '../components/TopBar'
 const AttendeePage = () => {
   return (
     <>
-      <TopBar title="Participante" />
+      <TopBar />
     </>
   )
 }

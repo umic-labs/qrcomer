@@ -1,4 +1,4 @@
-import mealsApi from '../api/meals'
+import mealsApi from '../api/meals.api'
 
 export function fetch() {
   return new Promise((resolve, reject) => {
