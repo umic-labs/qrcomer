@@ -1,15 +1,21 @@
 {
+  "lectures_page": {},
   "meals_page": {
     "breakfast": "Café da manhã",
     "dinner": "Janta",
     "lunch": "Almoço",
-    "title": "Carimbar refeições"
-  },
-  "lectures_page": {
-
+    "title": "Resgatar refeições"
   },
   "register_service_page": {
-    "title": "Leia o código QR:"
+    "available": "Disponível para resgate",
+    "new_reading": "Nova leitura",
+    "register_service": "Resgatar",
+    "title": "Leia o código QR:",
+    "unavailable": "Indisponível. Este ticket já foi resgatado",
+    "invalid_code": "Codigo invalido",
+    "read_again": "Ler novamente",
+    "register_success": "Resgate realizado com sucesso.",
+    "register_failure": "Não foi possível resgatar o ticket."
   },
   "topbar": {
     "title": "QRComer"
