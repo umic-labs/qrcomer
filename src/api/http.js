@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { BASE_URL } from './endpoints'
 
 const http = axios.create({
-  baseURL: BASE_URL
+  baseURL: process.env.REACT_APP_API_URL
 })
 
 // Add a request interceptor
