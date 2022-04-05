@@ -1,12 +1,11 @@
 {
   "lectures_page": {},
-  "meals_page": {
-    "breakfast": "Café da manhã",
-    "dinner": "Janta",
-    "lunch": "Almoço",
-    "title": "Resgatar refeições"
+  "appointments_page": {
+    "redeem_workshop": "Carimbar Workshop",
+    "redeem_meal": "Carimbar Refeição",
+    "redeem_lecture": "Carimbar Palestra"
   },
-  "register_service_page": {
+  "redeem_page": {
     "available": "Disponível para resgate",
     "new_reading": "Nova leitura",
     "register_service": "Resgatar",

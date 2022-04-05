@@ -1,22 +1,30 @@
-import { Container, Divider, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
+import {
+  Container,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography
+} from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
 import TopBar from '../components/TopBar'
-import { fetch } from '../services/meals.service'
+import { fetch } from '../services/appointments.service'
 
-const HomePage = () => {
+const AppointmentsPage = ({ type }) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const [meals, setMeals] = useState([])
+  const [appointments, setAppointments] = useState([])
 
   useEffect(() => {
-    fetch().then(setMeals)
-  }, [])
+    fetch({ type }).then(setAppointments)
+  }, [type])
 
-  const mealsByDate = composeMealsByDate({ meals })
+  const appointmentsByDate = composeAppointmentsByDate({ appointments })
 
   return (
     <>
@@ -30,11 +38,11 @@ const HomePage = () => {
           variant="h5"
           sx={{ mb: 3 }}
         >
-          {t('meals_page.title')}
+          {t(`appointments_page.redeem_${type}`)}
         </Typography>
 
           {
-            mealsByDate?.map(day => (
+            appointmentsByDate?.map(day => (
               <Box key={day.date} sx={{ mb: 4 }}>
                 <Typography
                   variant="h6"
@@ -47,13 +55,13 @@ const HomePage = () => {
                   <nav aria-label="secondary mailbox folders">
                     <List>
                       {
-                        day.meals.map(meal => (
-                          <div key={meal.id}>
+                        day.appointments?.map(appointment => (
+                          <div key={appointment.id}>
                             <ListItem disablePadding>
                               <ListItemButton
-                                onClick={() => navigate(`/register-service?meal=${meal.id}`)}
+                                onClick={() => navigate(`/redeem/${appointment.id}`)}
                               >
-                                <ListItemText primary={ t(`meals_page.${meal.type}`) } />
+                                <ListItemText primary={appointment.title} />
                               </ListItemButton>
                             </ListItem>
 
@@ -72,17 +80,17 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default AppointmentsPage
 
-const composeMealsByDate = ({ meals }) => {
-  if(!meals) return
+const composeAppointmentsByDate = ({ appointments }) => {
+  if(!appointments) return
 
-  const uniqueDates = [...new Set(meals.map(meal => meal.date))]
+  const uniqueDates = [...new Set(appointments.map(appointment => appointment.date))]
 
   return uniqueDates.map(date => (
     {
       date: date,
-      meals: meals.filter((meal) => meal.date === date)
+      appointments: appointments.filter((appointment) => appointment.date === date)
     }
   ))
 }

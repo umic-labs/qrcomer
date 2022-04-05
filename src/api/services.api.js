@@ -2,12 +2,13 @@ import { SERVICES } from './endpoints'
 import http from './http'
 
 const servicesApi = {
-  registerPresence({ attendee, meal, lecture }) {
-    return http.patch(SERVICES, null, { params: { attendee, meal, lecture }})
+  redeem({ attendee, appointment }) {
+    return http.patch(SERVICES, null, { params: { attendee, appointment }})
   },
 
-  findOne({ attendee, meal, lecture }) {
-    return http.get(SERVICES, { params: { attendee, meal, lecture }})
+  findOne({ attendee, appointment }) {
+    const url = `${SERVICES}/appointment/${appointment}`
+    return http.get(url, { params: { attendee }})
   }
 }
 

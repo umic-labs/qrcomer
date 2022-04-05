@@ -3,38 +3,36 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../components/TopBar'
 import QrReader from 'react-qr-reader'
-import { registerPresence, findOne } from '../services/services.service'
-import { useLocation } from 'react-router-dom'
+import { redeem, findOne } from '../services/services.service'
+import { useParams } from 'react-router-dom'
 
-const RegisterServicePage = () => {
+const RedeemPage = () => {
   const { t } = useTranslation()
-  const location  = useLocation()
   
   const [code, setCode]  = useState(null)
   const [service, setService]  = useState(null)
   const [isSuccess, setIsSuccess]  = useState(null)
-  const params = useMemo(() => new URLSearchParams(location.search), [location])
   
   const hasRegisterPresence = shouldRegisterPresence({ service })
   const isValidCode = shouldValidateCode({ code })
-  const lecture = params.get('lecture')
-  const meal = params.get('meal')
+  const { appointment } = useParams();
   
   useEffect(() => {
+
+    console.log({ appointment })
+
     isValidCode && findOne({ 
       attendee: code,
-      lecture,
-      meal
+      appointment,
     })
       .then(setService)
       .catch(console.warn)
-  }, [code, meal, lecture, isValidCode])
+  }, [code, appointment, isValidCode])
 
   function handleRegisterPresence() {
-    registerPresence({ 
+    redeem({ 
       attendee: code,
-      lecture,
-      meal
+      appointment,
     })
       .then(() => setIsSuccess(true))
       .catch(console.warn)
@@ -62,7 +60,7 @@ const RegisterServicePage = () => {
           variant="h5"
           sx={{ mb: 3 }}
         >
-          {t('register_service_page.title')}
+          {t('redeem_page.title')}
         </Typography>
         
         { !code &&
@@ -75,10 +73,10 @@ const RegisterServicePage = () => {
         }
 
         {
-          service?.present && (
+          service?.isRedeemed && (
             <>
-              <p>{t('register_service_page.unavailable')}</p> 
-              <Button onClick={() => reset()}>{t('register_service_page.new_reading')}</Button>
+              <p>{t('redeem_page.unavailable')}</p> 
+              <Button onClick={() => reset()}>{t('redeem_page.new_reading')}</Button>
             </>
           )
         }
@@ -86,9 +84,9 @@ const RegisterServicePage = () => {
         {
           hasRegisterPresence && (
             <>
-              <p>{t('register_service_page.available')}</p> 
+              <p>{t('redeem_page.available')}</p> 
               <Button onClick={() => handleRegisterPresence()}>
-                {t('register_service_page.register_service')}
+                {t('redeem_page.register_service')}
               </Button>
             </>
           )
@@ -96,21 +94,21 @@ const RegisterServicePage = () => {
 
         { !!code && !isValidCode &&
           <>
-            <p>{t('register_service_page.invalid_code')}</p>
+            <p>{t('redeem_page.invalid_code')}</p>
 
-            <Button onClick={() => reset()}>{t('register_service_page.read_again')}</Button>
+            <Button onClick={() => reset()}>{t('redeem_page.read_again')}</Button>
           </>
         }
 
         <Snackbar open={isSuccess} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            {t('register_service_page.register_success')}
+            {t('redeem_page.register_success')}
           </Alert>
         </Snackbar>
 
         <Snackbar open={isSuccess === false} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            {t('register_service_page.register_failure')}
+            {t('redeem_page.register_failure')}
           </Alert>
         </Snackbar>
       </Container>
@@ -118,7 +116,7 @@ const RegisterServicePage = () => {
   )
 }
 
-export default RegisterServicePage
+export default RedeemPage
 
 const shouldValidateCode = ({ code }) => {
   if (!code) return
@@ -127,5 +125,5 @@ const shouldValidateCode = ({ code }) => {
 
 const shouldRegisterPresence = ({ service }) => {
   if (!service) return
-  return service.present === false
+  return service.isRedeemed === false
 }

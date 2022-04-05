@@ -31,7 +31,7 @@ const HomePage = () => {
           sx={{ mb: 2 }}
           onClick={() => navigate('/meals')}
         >
-          Refecoes
+          Refeições
         </Button>
 
         <Button
@@ -41,6 +41,15 @@ const HomePage = () => {
           onClick={() => navigate('/lectures')}
         >
           Palestras
+        </Button>
+
+        <Button
+          variant="outlined"
+          size="large"
+          sx={{ mb: 2 }}
+          onClick={() => navigate('/workshops')}
+        >
+          Workshops
         </Button>
 
         <Button

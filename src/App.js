@@ -6,21 +6,21 @@ import {
 } from "react-router-dom";
 import './config/i18n'
 
-import MealsPage from "./pages/MealsPage";
 import HomePage from './pages/HomePage'
-import LecturesPage from './pages/LecturesPage'
+import AppointmentsPage from './pages/AppointmentsPage'
 import AttendeePage from './pages/AttendeePage'
-import RegisterServicePage from './pages/RegisterServicePage'
+import RedeemPage from './pages/RedeemPage'
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path='/' element={<HomePage/>} />
-        <Route path='/meals' element={<MealsPage/>} />
-        <Route path='/lectures' element={<LecturesPage/>} />
+        <Route path='/lectures' element={<AppointmentsPage type="lecture" />} />
+        <Route path='/meals' element={<AppointmentsPage type="meal" />} />
+        <Route path='/workshops' element={<AppointmentsPage type="workshop" />} />
         <Route path='/attendee' element={<AttendeePage/>} />
-        <Route path='/register-service' element={<RegisterServicePage/>} />
+        <Route path='/redeem/:appointment' element={<RedeemPage />} />
       </Routes>
     </Router>
   );
