@@ -7,8 +7,7 @@ const servicesApi = {
   },
 
   findOne({ attendee, appointment }) {
-    const url = `${SERVICES}/appointment/${appointment}`
-    return http.get(url, { params: { attendee }})
+    return http.get(SERVICES, { params: { appointment, attendee }})
   }
 }
 

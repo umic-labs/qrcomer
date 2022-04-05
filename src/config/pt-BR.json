@@ -10,11 +10,13 @@
     "new_reading": "Nova leitura",
     "register_service": "Resgatar",
     "title": "Leia o código QR:",
-    "unavailable": "Indisponível. Este ticket já foi resgatado",
     "invalid_code": "Codigo invalido",
     "read_again": "Ler novamente",
     "register_success": "Resgate realizado com sucesso.",
-    "register_failure": "Não foi possível resgatar o ticket."
+    "register_failure": "Não foi possível resgatar o ticket.",
+    "unavailable_title": "Indisponível para resgate",
+    "unavailable_text": "{{ attendee }} já realizou o resgate para {{ appointment }}",
+    "available_text": "Realizar resgate de {{ appointment }} para {{ attendee }}"
   },
   "topbar": {
     "title": "QRComer"

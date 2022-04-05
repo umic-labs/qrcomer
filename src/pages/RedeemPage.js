@@ -1,10 +1,12 @@
-import { Alert, Button, Container, Snackbar, Typography } from '@mui/material'
+import { Alert, Button, Card, CardActions, CardContent, Container, Snackbar, Typography } from '@mui/material'
 import React, { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../components/TopBar'
 import QrReader from 'react-qr-reader'
 import { redeem, findOne } from '../services/services.service'
 import { useParams } from 'react-router-dom'
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
 const RedeemPage = () => {
   const { t } = useTranslation()
@@ -13,14 +15,11 @@ const RedeemPage = () => {
   const [service, setService]  = useState(null)
   const [isSuccess, setIsSuccess]  = useState(null)
   
-  const hasRegisterPresence = shouldRegisterPresence({ service })
+  const isRedeemable = shouldRedeem({ service })
   const isValidCode = shouldValidateCode({ code })
   const { appointment } = useParams();
   
   useEffect(() => {
-
-    console.log({ appointment })
-
     isValidCode && findOne({ 
       attendee: code,
       appointment,
@@ -29,7 +28,7 @@ const RedeemPage = () => {
       .catch(console.warn)
   }, [code, appointment, isValidCode])
 
-  function handleRegisterPresence() {
+  function handleRedeem() {
     redeem({ 
       attendee: code,
       appointment,
@@ -74,21 +73,53 @@ const RedeemPage = () => {
 
         {
           service?.isRedeemed && (
-            <>
-              <p>{t('redeem_page.unavailable')}</p> 
-              <Button onClick={() => reset()}>{t('redeem_page.new_reading')}</Button>
-            </>
+            <Card>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {t('redeem_page.unavailable_title')}
+                </Typography>
+
+                <RemoveCircleOutlineOutlinedIcon color="warning" sx={{ fontSize: 300}} />
+
+                <Typography variant="body2" color="text.secondary">
+                  {t('redeem_page.unavailable_text', {
+                    attendee: service.attendee.name,
+                    appointment: service.appointment.title
+                  })}
+                </Typography> 
+              </CardContent>
+              
+              <CardActions>
+                <Button onClick={() => reset()}>{t('redeem_page.new_reading')}</Button>
+              </CardActions>
+            </Card>
           )
         }
 
         {
-          hasRegisterPresence && (
-            <>
-              <p>{t('redeem_page.available')}</p> 
-              <Button onClick={() => handleRegisterPresence()}>
-                {t('redeem_page.register_service')}
-              </Button>
-            </>
+          isRedeemable && (
+            <Card>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {t('redeem_page.available')}
+                </Typography>
+
+                <CheckCircleOutlineOutlinedIcon color="success" sx={{ fontSize: 300}} />
+
+                <Typography variant="body2" color="text.secondary">
+                  {t('redeem_page.available_text', {
+                    attendee: service.attendee.name,
+                    appointment: service.appointment.title
+                  })}
+                </Typography> 
+              </CardContent>
+              
+              <CardActions>
+                <Button onClick={() => handleRedeem()}>
+                  {t('redeem_page.register_service')}
+                </Button>
+              </CardActions>
+            </Card>
           )
         }
 
@@ -123,7 +154,7 @@ const shouldValidateCode = ({ code }) => {
   return /^COMIC2022.*$/.test(code)
 }
 
-const shouldRegisterPresence = ({ service }) => {
+const shouldRedeem = ({ service }) => {
   if (!service) return
   return service.isRedeemed === false
 }
