@@ -9,9 +9,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import AppsIcon from '@mui/icons-material/Apps';
+import { useTranslation } from 'react-i18next';
 
 export default function NavMenu() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <Paper sx={{ width: 250 }}>
@@ -27,21 +29,21 @@ export default function NavMenu() {
           <ListItemIcon>
             <RestaurantIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText> Carimbar refeicao </ListItemText>
+          <ListItemText> {t('nav_menu.redeem_meal')} </ListItemText>
         </MenuItem>
 
         <MenuItem onClick={ () => navigate('/lectures')}>
           <ListItemIcon>
             <ConfirmationNumberIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText> Carimbar palestra </ListItemText>
+          <ListItemText> {t('nav_menu.redeem_lecture')} </ListItemText>
         </MenuItem>
         
         <MenuItem onClick={ () => navigate('/meals')}>
           <ListItemIcon>
             <AppsIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText> Consultar cartela </ListItemText>
+          <ListItemText> {t('nav_menu.check_attendee')} </ListItemText>
         </MenuItem>
 
       </MenuList>

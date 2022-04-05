@@ -16,8 +16,10 @@ export function findOne({ attendee, appointment }) {
 
     servicesApi.findOne({ attendee, appointment }).then((response) =>{
       resolve(response.data)
-    }).catch((_error) => {
-      reject(new Error('Não foi possivel encontrar servico para esse congressista'))
+    }).catch((error) => {
+      if(error.response.status === 404) {
+        reject(new Error('Congressista não cadastrado para este encontro'))
+      }
     })
   })
 }

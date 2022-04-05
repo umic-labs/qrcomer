@@ -1,22 +1,28 @@
 {
-  "lectures_page": {},
   "appointments_page": {
-    "redeem_workshop": "Carimbar Workshop",
-    "redeem_meal": "Carimbar Refeição",
-    "redeem_lecture": "Carimbar Palestra"
+    "redeem_lecture": "Resgatar Palestra",
+    "redeem_meal": "Resgatar Refeição",
+    "redeem_workshop": "Resgatar Workshop"
+  },
+  "lectures_page": {},
+  "nav_menu": {
+    "check_attendee": "Consultar congressista",
+    "redeem_lecture": "Resgatar palestra",
+    "redeem_meal": "Resgatar refeição"
   },
   "redeem_page": {
     "available": "Disponível para resgate",
-    "new_reading": "Nova leitura",
-    "register_service": "Resgatar",
-    "title": "Leia o código QR:",
+    "available_text": "Realizar resgate de {{ appointment }} para {{ attendee }}",
     "invalid_code": "Codigo invalido",
+    "new_reading": "Nova leitura",
     "read_again": "Ler novamente",
-    "register_success": "Resgate realizado com sucesso.",
     "register_failure": "Não foi possível resgatar o ticket.",
-    "unavailable_title": "Indisponível para resgate",
+    "register_service": "Resgatar",
+    "register_success": "Resgate realizado com sucesso.",
+    "title": "Leia o código QR:",
     "unavailable_text": "{{ attendee }} já realizou o resgate para {{ appointment }}",
-    "available_text": "Realizar resgate de {{ appointment }} para {{ attendee }}"
+    "unavailable_title": "Indisponível para resgate",
+    "error_title": "Acesso Negado"
   },
   "topbar": {
     "title": "QRComer"

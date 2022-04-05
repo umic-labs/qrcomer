@@ -1,5 +1,5 @@
 import { Alert, Button, Card, CardActions, CardContent, Container, Snackbar, Typography } from '@mui/material'
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../components/TopBar'
 import QrReader from 'react-qr-reader'
@@ -7,6 +7,7 @@ import { redeem, findOne } from '../services/services.service'
 import { useParams } from 'react-router-dom'
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import BlockIcon from '@mui/icons-material/Block';
 
 const RedeemPage = () => {
   const { t } = useTranslation()
@@ -14,10 +15,11 @@ const RedeemPage = () => {
   const [code, setCode]  = useState(null)
   const [service, setService]  = useState(null)
   const [isSuccess, setIsSuccess]  = useState(null)
+  const [error, setError] = useState(null)
   
   const isRedeemable = shouldRedeem({ service })
   const isValidCode = shouldValidateCode({ code })
-  const { appointment } = useParams();
+  const { appointment } = useParams()
   
   useEffect(() => {
     isValidCode && findOne({ 
@@ -25,7 +27,7 @@ const RedeemPage = () => {
       appointment,
     })
       .then(setService)
-      .catch(console.warn)
+      .catch(setError)
   }, [code, appointment, isValidCode])
 
   function handleRedeem() {
@@ -41,6 +43,7 @@ const RedeemPage = () => {
   function reset() {
     setCode(null)
     setService(null)
+    setError(null)
   }
 
   function handleClose() {
@@ -55,25 +58,59 @@ const RedeemPage = () => {
         sx={{ p: 2 }}
         maxWidth="md"
       >
-        <Typography
-          variant="h5"
-          sx={{ mb: 3 }}
-        >
-          {t('redeem_page.title')}
-        </Typography>
         
         { !code &&
-          <QrReader
-            delay={300}
-            onError={console.warn}
-            onScan={setCode}
-            style={{ width: '100%' }}
-          />
+          <Card sx={{ textAlign: 'center' }}>
+            <Typography
+              variant="h5"
+              sx={{ mb: 3 }}
+            >
+              {t('redeem_page.title')}
+            </Typography>
+
+            <QrReader
+              delay={300}
+              onError={console.warn}
+              onScan={setCode}
+              style={{ width: '100%' }}
+            />
+          </Card>
+        }
+
+        {
+          isRedeemable && (
+            <Card sx={{ textAlign: 'center' }}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {t('redeem_page.available')}
+                </Typography>
+
+                <CheckCircleOutlineOutlinedIcon color="success" sx={{ fontSize: 300}} />
+
+                <Typography variant="body2" color="text.secondary">
+                  {t('redeem_page.available_text', {
+                    attendee: service.attendee.name,
+                    appointment: service.appointment.title
+                  })}
+                </Typography> 
+              </CardContent>
+              
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={() => handleRedeem()}
+                >
+                  {t('redeem_page.register_service')}
+                </Button>
+              </CardActions>
+            </Card>
+          )
         }
 
         {
           service?.isRedeemed && (
-            <Card>
+            <Card sx={{ textAlign: 'center' }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {t('redeem_page.unavailable_title')}
@@ -97,27 +134,22 @@ const RedeemPage = () => {
         }
 
         {
-          isRedeemable && (
-            <Card>
+          !!error && (
+            <Card sx={{ textAlign: 'center' }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  {t('redeem_page.available')}
+                  {t('redeem_page.error_title')}
                 </Typography>
 
-                <CheckCircleOutlineOutlinedIcon color="success" sx={{ fontSize: 300}} />
+                <BlockIcon color="error" sx={{ fontSize: 300}} />
 
                 <Typography variant="body2" color="text.secondary">
-                  {t('redeem_page.available_text', {
-                    attendee: service.attendee.name,
-                    appointment: service.appointment.title
-                  })}
+                  {error.message}
                 </Typography> 
               </CardContent>
               
               <CardActions>
-                <Button onClick={() => handleRedeem()}>
-                  {t('redeem_page.register_service')}
-                </Button>
+                <Button onClick={() => reset()}>{t('redeem_page.new_reading')}</Button>
               </CardActions>
             </Card>
           )

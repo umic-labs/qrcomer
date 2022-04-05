@@ -58,7 +58,7 @@ const HomePage = () => {
           sx={{ mb: 2 }}
           onClick={() => navigate('/attendee')}
         >
-          Participante
+          Consultar congressista
         </Button>
 
       </Container>
