@@ -1,4 +1,5 @@
-export const MEALS = '/meals'
+export const ATTENDEES = '/attendees'
 export const LECTURES = '/lectures'
+export const MEALS = '/meals'
 export const SERVICES = '/services'
 export const WORKSHOPS = '/workshops'

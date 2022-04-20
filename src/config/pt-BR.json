@@ -26,5 +26,12 @@
   },
   "topbar": {
     "title": "QRComer"
+  },
+  "summary_attendee": {
+    "has_lectures": "com plenárias",
+    "has_meals": "com refeições",
+    "meals": "Refeições",
+    "lectures": "Plenárias",
+    "workshops": "Workshops"
   }
 }
