@@ -1,13 +1,13 @@
 {
   "appointments_page": {
-    "redeem_lecture": "Resgatar Palestra",
+    "redeem_lecture": "Resgatar Plenária",
     "redeem_meal": "Resgatar Refeição",
     "redeem_workshop": "Resgatar Workshop"
   },
   "lectures_page": {},
   "nav_menu": {
     "check_attendee": "Consultar congressista",
-    "redeem_lecture": "Resgatar palestra",
+    "redeem_lecture": "Resgatar plenária",
     "redeem_meal": "Resgatar refeição"
   },
   "redeem_page": {
