@@ -11,41 +11,64 @@ export default function SummaryAttendee({ attendee }) {
 
   return (
     <Paper sx={{ padding: 2 }}>
-     
-      <Typography variant="h4"> {attendee.name} </Typography>
-      <Typography> {attendee.code} </Typography>
-
-      <Typography> {attendee.hasLectures && t('summary_attendee.has_lectures')} </Typography>
-      <Typography> {attendee.hasMeals && t('summary_attendee.has_meals')} </Typography>
-
-
-
-      <Typography variant="h6"> {t('summary_attendee.meals')} </Typography>
-      <ul>
-        {
-          meals.map((service) => (
-            <li>{service.appointment?.title} - {service.isRedeemed && `resgatado`}</li>
-          ))
-        }
-      </ul>
-
-      <Typography variant="h6"> {t('summary_attendee.lectures')} </Typography>
-      <ul>
-        {
-          lectures.map((service) => (
-            <li>{service.appointment?.title} - {service.isRedeemed && `resgatado`}</li>
-          ))
-        }
-      </ul>
       
-      <Typography variant="h6"> {t('summary_attendee.workshops')} </Typography>
-      <ul>
-        {
-          workshops.map((service) => (
-            <li>{service.appointment?.title} - {service.isRedeemed && `resgatado`}</li>
-          ))
-        }
-      </ul>
+      <div className='attendee-info'>
+        <Typography variant="h4"> {attendee.name} </Typography>
+        <Typography> {attendee.code} </Typography>
+      </div>
+
+      <div className='attende-service'>
+        <Typography> {attendee.hasLectures && t('summary_attendee.has_lectures')} </Typography>
+        <Typography> {attendee.hasMeals && t('summary_attendee.has_meals')} </Typography>
+      </div>
+
+      <div className='services-info'>
+        <Typography variant="h6"> {t('summary_attendee.meals')} </Typography>
+        <ul>
+          {
+            meals.map((service) => (
+              <li
+                className="service" 
+                key={service.id}
+              >
+                {service.appointment?.title}{service.isRedeemed && ` - ✅`}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div className='services-info'>
+        <Typography variant="h6"> {t('summary_attendee.lectures')} </Typography>
+        <ul>
+          {
+            lectures.map((service) => (
+              <li
+                className="service" 
+                key={service.id}
+              >
+                {service.appointment?.title}{service.isRedeemed && ` - ✅`}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      
+      <div className='services-info'>
+        <Typography variant="h6"> {t('summary_attendee.workshops')} </Typography>
+        <ul>
+          {
+            workshops.map((service) => (
+              <li
+                className="service" 
+                key={service.id}
+              >
+                {service.appointment?.title}{service.isRedeemed && ` - ✅`}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
     </Paper>
   )
