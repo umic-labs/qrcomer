@@ -85,15 +85,18 @@ export default AppointmentsPage
 const composeAppointmentsByDate = ({ appointments }) => {
   if(!appointments) return
 
-  const uniqueDates = [...new Set(appointments.map(appointment => appointment.date))]
+  const uniqueDates = [...new Set(appointments.map(appointment => getDayMonthAndYearFromDate(appointment.date)))]
 
   return uniqueDates.map(date => (
     {
       date: date,
-      appointments: appointments.filter((appointment) => appointment.date === date)
+      appointments: appointments.filter((appointment) => 
+        getDayMonthAndYearFromDate(appointment.date) === getDayMonthAndYearFromDate(date))
     }
   ))
 }
+
+const getDayMonthAndYearFromDate = date => String(date).split('T')[0]
 
 const composeDateTitle = ({ date }) => {
   if (!date) return

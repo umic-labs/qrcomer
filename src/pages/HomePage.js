@@ -40,7 +40,7 @@ const HomePage = () => {
           sx={{ mb: 2 }}
           onClick={() => navigate('/lectures')}
         >
-          Palestras
+          Plenárias
         </Button>
 
         <Button
