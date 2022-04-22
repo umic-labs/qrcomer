@@ -1,4 +1,4 @@
-import { Alert, Button, Card, CardActions, CardContent, Container, Snackbar, Typography } from '@mui/material'
+import { Alert, Box, Button, Card, CardActions, CardContent, Container, Snackbar, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../components/TopBar'
@@ -13,6 +13,7 @@ const RedeemPage = () => {
   const { t } = useTranslation()
   
   const [code, setCode]  = useState(null)
+  const [manualCode, setManualCode]  = useState(null)
   const [service, setService]  = useState(null)
   const [isSuccess, setIsSuccess]  = useState(null)
   const [error, setError] = useState(null)
@@ -74,6 +75,24 @@ const RedeemPage = () => {
               onScan={setCode}
               style={{ width: '100%' }}
             />
+
+            <Box sx={{ padding: 2 }}>
+              <TextField
+                id="outlined-basic"
+                label="Código"
+                variant="outlined"
+                onChange={(e) => setManualCode(e.target.value)}
+                sx={{ mr: 2 }}
+              />
+
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => setCode(manualCode)}
+              >
+                Enviar
+              </Button>
+            </Box>
           </Card>
         }
 
