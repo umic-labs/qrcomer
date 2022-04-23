@@ -88,7 +88,7 @@ const RedeemPage = () => {
               <Button
                 variant="contained"
                 color="success"
-                onClick={() => setCode(manualCode)}
+                onClick={() => setCode(`COMIC2022-${manualCode}`)}
               >
                 Enviar
               </Button>
